@@ -98,16 +98,9 @@ AXION_CAMERA_FRONT_INFO := 16
 BYPASS_CHARGE_SUPPORTED ?= true
 AXION_MAINTAINER := Tony01
 AXION_PROCESSOR := Qualcomm®_Snapdragon™_888
-# PartnerPkgs (SetupWizardPrebuilt/SetupWizardPixelPrebuilt) pulls in Google's
-# own OOBE flow, whose OpaWrapper (Assistant opt-in) step launches an intent
-# into com.google.android.googlequicksearchbox (Velvet) unconditionally. This
-# build's TARGET_GAPPS_VARIANT=core never installs Velvet, and OpaWrapper's
-# own "no matching activity" fallback doesn't actually advance to the next
-# screen -- it leaves the task parked on OpaWrapper, resumed, indefinitely
-# (confirmed live via dumpsys activity top, lemonade). Disabled until that's
-# fixed (install Velvet, or patch OpaWrapper) or Google fixes the fallback
-# upstream.
-TARGET_INCLUDE_PARTNER_SETUP := false
+# Google's setup wizard. On pico/core the Assistant opt-in step, which needs
+# the Google app, is removed by PixelSetupWizardResCommon (sm8350-common).
+TARGET_INCLUDE_PARTNER_SETUP := true
 TARGET_INCLUDE_GOOGLE_TELECOMM := true
 TARGET_NEEDS_VULKAN_MEDIA_FIX := true
 
