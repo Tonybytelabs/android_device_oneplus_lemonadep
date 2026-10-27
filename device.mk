@@ -123,5 +123,9 @@ $(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 # Inherit from the common OEM chipset makefile.
 $(call inherit-product, device/oneplus/sm8350-common/common.mk)
 
+# Patched odm camera configs from the camera repo. Must come before the vendor
+# makefile: the first PRODUCT_COPY_FILES entry for a destination wins.
+$(call inherit-product-if-exists, vendor/oplus/camera/devices/lemonadep.mk)
+
 # Inherit from the proprietary files makefile.
 $(call inherit-product, vendor/oneplus/lemonadep/lemonadep-vendor.mk)
